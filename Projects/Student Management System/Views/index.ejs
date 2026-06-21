@@ -1,16 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        }
+
+        table {
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>student details</h1>
-    <% AllStudent.forEach(student => { %>
-        <%= student.name%>
-        <%=  student.Id %>
-    <% }) %>
+    <table border="1px" cellpadding="10">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Standard</th>
+            <th>Result</th>
+            
+        </thead>
+
+        <tbody>
+            <% AllStudent.forEach(student=> { %>
+                <tr>
+                    <td>
+                        <%= student.Id %>
+                    </td>
+                    <td>
+                        <%= student.Name %>
+                    </td>
+
+                    <td>
+                        <%= student.Course %>
+                    </td>
+                    <td>
+                        <%= student.Standard %>
+                    </td>
+                    <td>
+                        <%= student.Result %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
 
 </body>
+
 </html>
