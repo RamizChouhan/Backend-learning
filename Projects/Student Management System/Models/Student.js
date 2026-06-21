@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const StudentDetails = mongoose.Schema({
-     Id: {
+    Id: {
         type: Number,
         required: true,
         unique: true
@@ -11,18 +11,18 @@ const StudentDetails = mongoose.Schema({
         type: String,
         required: true
     },
-    
-    Course:{
-        type:String,
-        required:true,
+
+    Course: {
+        type: String,
+        required: true,
     },
-    Standard:{
-        type:String,
-        required:true,
+    Standard: {
+        type: String,
+        required: true,
     },
-    Result:{
-        type:String,
-        required:true,
+    Result: {
+        type: String,
+        required: true,
     },
 });
 
