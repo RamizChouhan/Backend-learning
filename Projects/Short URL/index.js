@@ -1,36 +1,43 @@
 const express = require("express");
-const path = require("path");
-const { connectToMongoDB} = require("./connect");
-const urlRoute = require("./Routes/url");
-const staticRouter = require("./Routes/StaticRouter");
-const URL = require('./Models/url');
 const app = express();
+const path = require("path");
+const URL = require('./Models/url');
+const cookieParser = require("cookie-parser");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middleware/auth");
 const PORT = 8001;
+const { connectToMongoDB } = require("./connect");
+
+const staticRouter = require("./Routes/StaticRouter");
+const urlRoute = require("./Routes/url");
+const userRoute = require("./Routes/user");
 
 
+connectToMongoDB('mongodb://127.0.0.1:27017/short-url').then(() => console.log("MongoDB Connected"));
 
-connectToMongoDB('mongodb://127.0.0.1:27017/short-url').then(()=>console.log("MongoDB Connected"));
-
-app.set("view engine","ejs");
-app.set("views",path.resolve("./views"));
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use("/", checkAuth, staticRouter);
+app.use("/url", restrictToLoggedinUserOnly, urlRoute);
+app.use("/user", userRoute);
 
-app.use("/url",urlRoute);
-app.use("/",staticRouter);
 
-app.get("/url/:shortId",async (req,res)=>{
+app.get("/url/:shortId", async (req, res) => {
    const shortId = req.params.shortId;
-  const entry = await URL.findOneAndUpdate({
-     shortId,
-   },{$push:{
-      visitHistory:{
-          timeStam:Date.now(),
-      },
-   }});
+   const entry = await URL.findOneAndUpdate({
+      shortId,
+   }, {
+      $push: {
+         visitHistory: {
+            timeStam: Date.now(),
+         },
+      }
+   });
 
    res.redirect(entry.redirectURL);
 })
-app.listen(PORT,()=>{
-     console.log(`Server Started At PORT http://localhost:${PORT}`);
+app.listen(PORT, () => {
+   console.log(`Server Started At PORT http://localhost:${PORT}`);
 });
