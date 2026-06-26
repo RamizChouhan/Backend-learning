@@ -29,7 +29,7 @@ async function handleUserLogin(req, res) {
         })
     }
     const sessionId = uuidv4();
-    console.log("sessionId :",sessionId);
+
 
     setUser(sessionId, user);
     res.cookie("uid", sessionId);
