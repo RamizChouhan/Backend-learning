@@ -3,7 +3,7 @@
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        
+
     }
 
     table {
@@ -11,12 +11,11 @@
         border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
         border: 1px solid black;
         padding: 10px;
     }
-
-
 </style>
 
 <head>
@@ -26,7 +25,7 @@
 <body>
     <h1>URL Shortener</h1>
     <% if (locals.id) { %>
-        <p>URL Generated: http://localhost:8001/url/<%= id %>
+        <p>URL Generated: https://localhost:8001/url/<%= id %>
         </p>
         <% } %>
             <div>
@@ -47,22 +46,22 @@
                             <th>Clicks</th>
                         </thead>
                         <tbody>
-                           
-                            <% urls.forEach((url,index)=> { %>
-                                 <tr>
-                                <td>
-                                    <%= index + 1 %>
-                                </td>
-                                <td>
-                                    <%= url.shortId %>
-                                </td>
-                                <td>
-                                    <%= url.redirectURL %>
-                                </td>
-                                <td>
-                                    <%= url.visitHistory.length %>
 
-                                </td>
+                            <% urls.forEach((url,index)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= index + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= url.shortId %>
+                                    </td>
+                                    <td>
+                                        <%= url.redirectURL %>
+                                    </td>
+                                    <td>
+                                        <%= url.visitHistory.length %>
+
+                                    </td>
                                 </tr>
 
                                 <% }) %>
