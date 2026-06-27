@@ -20,11 +20,17 @@ const StudentDetails = mongoose.Schema({
         type: String,
         required: true,
     },
-    Result: {
+    Marks: {
         type: String,
         required: true,
     },
-});
+
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
+    }
+    
+}, { timestamps: true });
 
 const Student = mongoose.model("student", StudentDetails);
 

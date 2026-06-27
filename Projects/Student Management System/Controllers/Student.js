@@ -1,20 +1,22 @@
 const Student = require("../Models/Student");
 
 async function ShowStudentDetail(req, res) {
-  const AllStudent = await Student.find({});
+  console.log(req.user);
+  const AllDetail = await Student.find({createdBy:req.user._id});
+  console.log("show student detail alldetail :",AllDetail);
   return res.render('index', {
-    AllStudent: AllStudent,
+    AllDetail: AllDetail,
   });
 }
 
 async function GetStudentDetail(req, res) {
-  console.log("POST Route Hit");
-  console.log(req.body);
+  
+  console.log("get student detail fun : ",req.body);
 
   try {
     const body = req.body;
 
-    if (!body.Name || !body.Id || !body.Course || !body.Standard || !body.Result) {
+    if (!body.Name || !body.Id || !body.Course || !body.Standard || !body.Marks) {
       return res.status(400).json({
         msg: "All Fields Are Required",
       });
@@ -25,16 +27,11 @@ async function GetStudentDetail(req, res) {
       Name: body.Name,
       Course: body.Course,
       Standard: body.Standard,
-      Result: body.Result,
-
+      Marks: body.Marks,
+      createdBy:req.user._id
     });
 
-    console.log("data:", data);
-
-    return res.status(201).json({
-      message: "Successful",
-      student: data,
-    });
+    return res.redirect('/student'); 
   } catch (error) {
     return res.status(500).json({
       message: "Internal Server Error",

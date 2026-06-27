@@ -32,28 +32,28 @@
             <th>Name</th>
             <th>Course</th>
             <th>Standard</th>
-            <th>Result</th>
+            <th>Marks</th>
 
         </thead>
 
         <tbody>
-            <% AllStudent.forEach(student=> { %>
+            <% AllDetail.forEach(detail => { %>
                 <tr>
                     <td>
-                        <%= student.Id %>
+                        <%= detail.Id %>
                     </td>
                     <td>
-                        <%= student.Name %>
+                        <%= detail.Name %>
                     </td>
 
                     <td>
-                        <%= student.Course %>
+                        <%= detail.Course %>
                     </td>
                     <td>
-                        <%= student.Standard %>
+                        <%= detail.Standard %>
                     </td>
                     <td>
-                        <%= student.Result %>
+                        <%= detail.Marks %>
                     </td>
                 </tr>
                 <% }) %>
