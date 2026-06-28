@@ -29,11 +29,14 @@ async function handleUserLogin(req,res){
         "error":"Invalid Username Or Password",
      });
    };
-    
-   console.log("handleuserlogin  function hit");
-   const sessionId = uuidv4();
-   setUser(sessionId,user);
-   res.cookie("uid",sessionId);
+     
+    //statefull authentication
+//    console.log("handleuserlogin  function hit");
+//    const sessionId = uuidv4();
+//    setUser(sessionId,user);
+//    res.cookie("uid",sessionId); 
+      const  token = setUser(user);
+      res.cookie("uid",token);
    return res.redirect("/student");
 }
 

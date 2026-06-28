@@ -4,7 +4,7 @@ const StudentDetails = mongoose.Schema({
     Id: {
         type: Number,
         required: true,
-        unique: true
+      
     },
 
     Name: {
